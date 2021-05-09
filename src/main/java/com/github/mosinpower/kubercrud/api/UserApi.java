@@ -22,14 +22,12 @@ public interface UserApi {
             @ApiResponse(responseCode = "201", description = "successful operation"),
             @ApiResponse(responseCode = "500", description = "internal error")
     })
-    @RequestMapping(value = "/user",
-            consumes = {"application/json"},
-            method = RequestMethod.POST)
+    @PostMapping(value = "/user", consumes = {"application/json"})
     ResponseEntity<UserDto> createUser(@Parameter(in = ParameterIn.DEFAULT, description = "Created user object", required = true, schema = @Schema())
                                        @Valid @RequestBody UserDto body);
 
 
-    @Operation(summary = "", description = "deletes a single user based on the ID supplied", tags = {"user"})
+    @Operation(summary = "Delete user", description = "deletes a single user based on the ID supplied", tags = {"user"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "user deleted"),
             @ApiResponse(responseCode = "200", description = "not found"),
