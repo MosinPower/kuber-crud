@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  db_host: postgredb-host
-  db_user: postgre
-  db_name: postgre
+  db_host: postgres
+  db_user: postgres
+  db_name: postgres
 ---
 apiVersion: v1
 kind: Secret

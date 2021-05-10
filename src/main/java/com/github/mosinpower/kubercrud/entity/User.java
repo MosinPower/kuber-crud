@@ -3,13 +3,11 @@ package com.github.mosinpower.kubercrud.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "user_user")
 public class User {
 
     @Id
