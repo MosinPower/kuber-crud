@@ -6,7 +6,7 @@ spec:
   selector:
     app: kuber-crud
   ports:
-    - port: 80
+    - port: 8080
       targetPort: api
       protocol: TCP
       name: api

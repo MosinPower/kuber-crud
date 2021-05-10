@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  db_host: postgredb-host
+  db_user: postgre
+  db_name: postgre
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+data:
+  db_password: c2VjcmV0aWs=

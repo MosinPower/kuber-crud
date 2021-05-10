@@ -16,37 +16,40 @@ spec:
         - name: kuber-crud
           image: mosin/kuber-crud:v1
           ports:
-            - containerPort: 80
-              name: web
             - containerPort: 8080
               name: api
             - containerPort: 9000
               name: management
-          livenessProbe:
-            httpGet:
-              port: management
-              path: /actuator/health
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              port: management
-              path: /actuator/health
-            initialDelaySeconds: 5
-            periodSeconds: 5
+#          livenessProbe:
+#            httpGet:
+#              port: management
+#              path: /actuator/health
+#            initialDelaySeconds: 5
+#            periodSeconds: 10
+#          readinessProbe:
+#            httpGet:
+#              port: management
+#              path: /actuator/health
+#            initialDelaySeconds: 5
+#            periodSeconds: 5
           env:
-            - name: POSTGRES_USER
+            - name: DB_USER
               valueFrom:
                 configMapKeyRef:
                   name: postgres-config
-                  key: postgres_user
-            - name: POSTGRES_HOST
+                  key: db_user
+            - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: postgres-config
-                  key: postgres_host
-            - name: POSTGRES_PASSWORD
+                  key: db_host
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: db_name
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secret
-                  key: postgres_password
+                  key: db_password
