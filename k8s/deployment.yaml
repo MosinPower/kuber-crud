@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuber-crud-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuber-crud
+  template:
+    metadata:
+      labels:
+        app: kuber-crud
+    spec:
+      containers:
+        - name: kuber-crud
+          image: mosin/kuber-crud:v1
+          ports:
+            - containerPort: 80
+              name: web
+            - containerPort: 8080
+              name: api
+            - containerPort: 9000
+              name: management
+          livenessProbe:
+            httpGet:
+              port: management
+              path: /actuator/health
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: management
+              path: /actuator/health
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: postgres_user
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: postgres_host
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres_password
